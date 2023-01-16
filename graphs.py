@@ -33,7 +33,7 @@ def graph(S, Theta, W, labels, dir) :
             cluster[t] = ((S[t]==k).sum())
         clusters[k, :] = cluster
 
-    fig, axes = plt.subplots(2, K, figsize=(7*K, 10), sharey=True)
+    fig, axes = plt.subplots(2, K, figsize=(7*K, 10), sharey="row")
 
     for k in range(K): 
         for i in range(len(labels)) : 
