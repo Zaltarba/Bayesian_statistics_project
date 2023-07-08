@@ -2,13 +2,13 @@
 
 ## Introduction
 
-L'objet de ce projet est de grouper au sein de différents clusters un ensemble de séries temporelles, et ce faisant d'estimer le modèle statistique décrivant les séries temporelles de chaque cluster. 
-Pour conduire nos estimations, nous nous plaçons dans le cadre bayésien et utilisons des méthodes de simulation de Monte Carlo et chaîne de Markov cachées.
-\newline
+L'objet de ce projet est de grouper au sein de différents clusters un ensemble de séries temporelles, et ce faisant d'estimer le modèle statistique décrivant les séries temporelles de chaque cluster.  
+Pour conduire nos estimations, nous nous plaçons dans le cadre bayésien et utilisons des méthodes de simulation de Monte Carlo et chaîne de Markov cachées.  
+
 Soit ($y_{i,t}$), $t=1,...,T$, une série temporelle multiple, parmi N autres series temporelles $i=1,...,N$, on fait l'hypothèse que ces séries appartiennent à K clusters différents, et que toutes les séries temporelles appartenant à un cluster $k$ sont décrites par le même modèle statistique avec un paramètre spécifique au groupe, $\theta_k$. L'appartenance à un groupe $k$ pour chaque série temporelle $i$ est inconnue à priori et est estimée en même temps que les paramètres $\theta_k$. On fait de plus l'hypothèse que les paramètres $\theta_k$ sont propres à chaque cluster. 
 \newline
-On introduit le vecteur $S = (S_1,S_2,...,S_N)$ où $\forall i \in 1,..,N$, $S_i$ $\in 1,...,K$ indique le groupe auquel appartient la série temprelle $i$, ainsi que le vecteur $\phi = (\eta_1, ..., \eta_K)$ où $\eta_k$ indique la proportion de série temporelle appartenant au cluster $k$
-\newline
+On introduit le vecteur $S = (S_1,S_2,...,S_N)$ où $\forall i \in 1,..,N$, $S_i$ $\in 1,...,K$ indique le groupe auquel appartient la série temprelle $i$, ainsi que le vecteur $\phi = (\eta_1, ..., \eta_K)$ où $\eta_k$ indique la proportion de série temporelle appartenant au cluster $k$.  
+
 En utilisant un algorithme de MCMC, nous allons itérativement estimer le vecteur $S$, puis les vecteurs $\theta$ et $\phi$.
 
 ## Le modèle
@@ -16,21 +16,18 @@ En utilisant un algorithme de MCMC, nous allons itérativement estimer le vecteu
 
 Pour $i = 1,..,N$, la densité de $y_i$ conditionnellement à $\theta_{S_i}$ s'écrit :
 
-\begin{equation}
 $p(y_i | \theta_{S_i})$} = \prod_{t=1}^{T} $p(y_{i,t}|y_{i,t-1},..,y_{i,0},\theta_{S_i})$
-\end{equation}
 
-Où $p(y_i|y_{i,t-1},..,y_{i,0},\theta_{S_i})$ est une densité connue qui dépendra du modèle choisi.
-\newline
+Où $p(y_i|y_{i,t-1},..,y_{i,0},\theta_{S_i})$ est une densité connue qui dépendra du modèle choisi.  
+
 Par conséquent, 
-\begin{equation}
+
 $p(y_i | S_i, \theta_1,...,\theta_K) =  p(y_i | \theta_{S_i})$ = \left\{\begin{array}{ll}
   $p(y_i | \theta_{1})$   & \mbox{si } S_i = 1  \\
   ...                                         \\
   $p(y_i | \theta_{K})$   & \mbox{si } S_i = K
 \end{array}\right.
-\end{equation}
-\newline
+
 Ensuite, on détermine un modèle probabiliste pour la variable $S = (S_1,..,S_N)$. On fait l'hypothèse que les $S_1, S_2,..,S_N$ sont deux à deux à prori indépendants et pour tout $i = 1,..,N$ on définit la probabilité à priori $Pr(S_i = k)$, la probabilité que la série temporelle $i$ appartienne au cluster $k$. On fait l'hypothèse que pour toute série $i$, on n'a à priori aucune idée d'à quel cluster elle appartient. Dès lors,
 \begin{equation}
 Pr(S_i = k | \eta_1,..,\eta_K) = \eta_k
