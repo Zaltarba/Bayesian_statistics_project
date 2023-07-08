@@ -16,16 +16,16 @@ En utilisant un algorithme de MCMC, nous allons itérativement estimer le vecteu
 
 Pour $i = 1,..,N$, la densité de $y_i$ conditionnellement à $\theta_{S_i}$ s'écrit :  
 
-$p(y_i | \theta_{S_i})$} = \prod_{t=1}^{T} $p(y_{i,t}|y_{i,t-1},..,y_{i,0},\theta_{S_i})$
+$p(y_i | \theta_{S_i}) = \prod_{t=1,...,T} p(y_{i,t}|y_{i,t-1},..,y_{i,0},\theta_{S_i})$
 
 Où $p(y_i|y_{i,t-1},..,y_{i,0},\theta_{S_i})$ est une densité connue qui dépendra du modèle choisi.   
 
 Par conséquent,  
 
-$p(y_i | S_i, \theta_1,...,\theta_K) =  p(y_i | \theta_{S_i})$ = \left\{\begin{array}{ll}
-  $p(y_i | \theta_{1})$   & \mbox{si } S_i = 1  \\
+$p(y_i | S_i, \theta_1,...,\theta_K) =  p(y_i | \theta_{S_i})$ =\\
+  $p(y_i | \theta_{1})$   si $S_i = 1$  \\
   ...                                         \\
-  $p(y_i | \theta_{K})$   & \mbox{si } S_i = K
+  $p(y_i | \theta_{K})$  si  $S_i = K$
 \end{array}\right.
 
 Ensuite, on détermine un modèle probabiliste pour la variable $S = (S_1,..,S_N)$. On fait l'hypothèse que les $S_1, S_2,..,S_N$ sont deux à deux à prori indépendants et pour tout $i = 1,..,N$ on définit la probabilité à priori $Pr(S_i = k)$, la probabilité que la série temporelle $i$ appartienne au cluster $k$. On fait l'hypothèse que pour toute série $i$, on n'a à priori aucune idée d'à quel cluster elle appartient. Dès lors,
@@ -35,22 +35,18 @@ La taille des groupes $(\eta_1,..,\eta_K)$ est à priori inconnue et est estimé
 ## L'algorithme de MCMC
 
 L'estimation du vecteur de paramètres $\psi = (\theta_1,..,\theta_k,\phi,S)$ à l'aide des MCMC se fait en deux étapes :
-\newline
-\vspace{0.4cm} 
-\newline
-\underline{\textbf{Etape 1}} : 
-\newline 
+
+### Etape 1  
+
 On fixe les paramètres \textit{$(\theta_1,..,\theta_K,\phi)$} et on estime S 
-\newline
+
 Dans cette étape, on va attribuer à chaque série temporelle $i$ un groupe $k$ en utilisant la posteriori $p(S_i|y,\theta_1,..,\theta_K,\phi)$.
-\newline
+
 Par la formule de Bayes et ce qui précède, on sait que :
 $p(S_i = k|y,\theta_1,..,\theta_K,\phi) \propto p(y_i|\theta_k)Pr(S_i = k|\phi)$
 En utilisant les équations (1) et (3), on va calculer cette à posteriori pour $k = 1,..,K$, et à l'aide de Python, nous allons simuler un tirage de $S_i$ et lui attribuer un groupe $k$.
 
-\vspace{0.4cm} 
-
-\underline{\textbf{Etape 2}} : 
+### Etape 2 
  
 On fixe la classification $S$ et on estime le vecteur de paramètres $(\theta_1,..,\theta_K,\phi)$
 
@@ -63,9 +59,10 @@ $p(\theta_k|y,S_1,..,S_N) = \prod_{i : S_i = k} p(\theta_k|y_i) =  \prod_{i : S_
 Où la priori $p(\theta_k)$ dépendra du modèle choisi.
 
 Enfin, on estime $\phi = (\eta_1,..,\eta_k$) en utilisant la posteriori (6) et un algorithme de Metropolis-Hastings : 
-$p(\phi|S,y) = p(y|S,\phi,\theta_1,..,\theta_K) = p(y|S,\phi,\theta_1,..,\theta_K) \times p(S|\phi) \times p(\phi)$
 
-$= \prod_{k=1}^{K} \prod_{i : S_i = k} p(y_i|\theta_k) \prod_{j = 1}^{N}Pr(S_j|\phi)p(\phi)$
+$p(\phi|S,y) = p(y|S,\phi,\theta_1,..,\theta_K) = p(y|S,\phi,\theta_1,..,\theta_K) \times p(S|\phi) \times p(\phi)$
+$= \prod_{k=1,...,K} \prod_{i : S_i = k} p(y_i|\theta_k) \prod_{j = 1,...,N}Pr(S_j|\phi)p(\phi)$
+
 Où la loi à priori de $\phi$ est une loi de Dirichlet(4,..,4)
 
 On va donc estimer $\psi = (\theta_1,..,\theta_k,\phi,S)$ en répétant P fois ces deux étapes, après avoir initaliser $\psi^{0} = (\theta_1^{0},..,\theta_k^{0},\phi^{0},S^{0})$
