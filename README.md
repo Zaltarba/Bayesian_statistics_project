@@ -16,9 +16,7 @@ En utilisant un algorithme de MCMC, nous allons itérativement estimer le vecteu
 
 Pour $i = 1,..,N$, la densité de $y_i$ conditionnellement à $\theta_{S_i}$ s'écrit :  
 
-$$
-p(y_i | \theta_{S_i})$} = \prod_{t=1}^{T} $p(y_{i,t}|y_{i,t-1},..,y_{i,0},\theta_{S_i})
-$$
+$p(y_i | \theta_{S_i})$} = \prod_{t=1}^{T} $p(y_{i,t}|y_{i,t-1},..,y_{i,0},\theta_{S_i})$
 
 Où $p(y_i|y_{i,t-1},..,y_{i,0},\theta_{S_i})$ est une densité connue qui dépendra du modèle choisi.   
 
@@ -31,9 +29,7 @@ $p(y_i | S_i, \theta_1,...,\theta_K) =  p(y_i | \theta_{S_i})$ = \left\{\begin{a
 \end{array}\right.
 
 Ensuite, on détermine un modèle probabiliste pour la variable $S = (S_1,..,S_N)$. On fait l'hypothèse que les $S_1, S_2,..,S_N$ sont deux à deux à prori indépendants et pour tout $i = 1,..,N$ on définit la probabilité à priori $Pr(S_i = k)$, la probabilité que la série temporelle $i$ appartienne au cluster $k$. On fait l'hypothèse que pour toute série $i$, on n'a à priori aucune idée d'à quel cluster elle appartient. Dès lors,
-$$
-Pr(S_i = k | \eta_1,..,\eta_K) = \eta_k
-$$
+$Pr(S_i = k | \eta_1,..,\eta_K) = \eta_k$
 La taille des groupes $(\eta_1,..,\eta_K)$ est à priori inconnue et est estimée grâce aux données.
 
 ## L'algorithme de MCMC
@@ -49,9 +45,7 @@ On fixe les paramètres \textit{$(\theta_1,..,\theta_K,\phi)$} et on estime S
 Dans cette étape, on va attribuer à chaque série temporelle $i$ un groupe $k$ en utilisant la posteriori $p(S_i|y,\theta_1,..,\theta_K,\phi)$.
 \newline
 Par la formule de Bayes et ce qui précède, on sait que :
-$$
-p(S_i = k|y,\theta_1,..,\theta_K,\phi) \propto p(y_i|\theta_k)Pr(S_i = k|\phi)
-$$
+$p(S_i = k|y,\theta_1,..,\theta_K,\phi) \propto p(y_i|\theta_k)Pr(S_i = k|\phi)$
 En utilisant les équations (1) et (3), on va calculer cette à posteriori pour $k = 1,..,K$, et à l'aide de Python, nous allons simuler un tirage de $S_i$ et lui attribuer un groupe $k$.
 
 \vspace{0.4cm} 
