@@ -58,21 +58,14 @@ Conditionnellement à $S$, les variables $\theta$ et $\phi$ sont indépendantes.
 
 Ainsi, $\theta_k$ est estimé en utilisant la posteriori (5) et un algorithme de Metropolis-Hastings:
 
-    \begin{split}
-        p(\theta_k|y,S_1,..,S_N) &= \prod_{i : S_i = k} p(\theta_k|y_i)\\
-                                 &=  \prod_{i : S_i = k} p(y_i|\theta_k)p(\theta_k)
-    \end{split}
+$p(\theta_k|y,S_1,..,S_N) = \prod_{i : S_i = k} p(\theta_k|y_i) =  \prod_{i : S_i = k} p(y_i|\theta_k)p(\theta_k)$
 
 Où la priori $p(\theta_k)$ dépendra du modèle choisi.
 
 Enfin, on estime $\phi = (\eta_1,..,\eta_k$) en utilisant la posteriori (6) et un algorithme de Metropolis-Hastings : 
+$p(\phi|S,y) = p(y|S,\phi,\theta_1,..,\theta_K) = p(y|S,\phi,\theta_1,..,\theta_K) \times p(S|\phi) \times p(\phi)$
 
-    \begin{split}
-        p(\phi|S,y) &\propto p(y|S,\phi,\theta_1,..,\theta_K) \\
-                    &\propto p(y|S,\phi,\theta_1,..,\theta_K)p(S|\phi)p(\phi)\\
-                    &\propto \prod_{k=1}^{K} \prod_{i : S_i = k} p(y_i|\theta_k) \prod_{j = 1}^{N}Pr(S_j|\phi)p(\phi)
-    \end{split}
-
+$= \prod_{k=1}^{K} \prod_{i : S_i = k} p(y_i|\theta_k) \prod_{j = 1}^{N}Pr(S_j|\phi)p(\phi)$
 Où la loi à priori de $\phi$ est une loi de Dirichlet(4,..,4)
 
 On va donc estimer $\psi = (\theta_1,..,\theta_k,\phi,S)$ en répétant P fois ces deux étapes, après avoir initaliser $\psi^{0} = (\theta_1^{0},..,\theta_k^{0},\phi^{0},S^{0})$
