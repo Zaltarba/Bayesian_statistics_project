@@ -22,11 +22,11 @@ Où $p(y_i|y_{i,t-1},..,y_{i,0},\theta_{S_i})$ est une densité connue qui dépe
 
 Par conséquent,  
 
-$p(y_i | S_i, \theta_1,...,\theta_K) =  p(y_i | \theta_{S_i})$ =\\
-  $p(y_i | \theta_{1})$   si $S_i = 1$  \\
-  ...                                         \\
-  $p(y_i | \theta_{K})$  si  $S_i = K$
-\end{array}\right.
+$p(y_i | S_i, \theta_1,...,\theta_K) =  p(y_i | \theta_{S_i})$   f
+
+$=p(y_i | \theta_{1})$   si $S_i = 1$   
+...   
+$=p(y_i | \theta_{K})$  si  $S_i = K$
 
 Ensuite, on détermine un modèle probabiliste pour la variable $S = (S_1,..,S_N)$. On fait l'hypothèse que les $S_1, S_2,..,S_N$ sont deux à deux à prori indépendants et pour tout $i = 1,..,N$ on définit la probabilité à priori $Pr(S_i = k)$, la probabilité que la série temporelle $i$ appartienne au cluster $k$. On fait l'hypothèse que pour toute série $i$, on n'a à priori aucune idée d'à quel cluster elle appartient. Dès lors,
 $Pr(S_i = k | \eta_1,..,\eta_K) = \eta_k$
@@ -38,7 +38,7 @@ L'estimation du vecteur de paramètres $\psi = (\theta_1,..,\theta_k,\phi,S)$ à
 
 ### Etape 1  
 
-On fixe les paramètres \textit{$(\theta_1,..,\theta_K,\phi)$} et on estime S 
+On fixe les paramètres $(\theta_1,..,\theta_K,\phi)$ et on estime S 
 
 Dans cette étape, on va attribuer à chaque série temporelle $i$ un groupe $k$ en utilisant la posteriori $p(S_i|y,\theta_1,..,\theta_K,\phi)$.
 
