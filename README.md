@@ -1,4 +1,4 @@
-# Projet-statistiques-baye-siennes
+# Projet Statistiques Bayesiennes
 
 ## Introduction
 
