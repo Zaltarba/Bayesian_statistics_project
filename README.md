@@ -17,17 +17,17 @@ En utilisant un algorithme de MCMC, nous allons itérativement estimer le vecteu
 Pour $i = 1,..,N$, la densité de $y_i$ conditionnellement à $\theta_{S_i}$ s'écrit :
 
 \begin{equation}
-\textit{$p(y_i | \theta_{S_i})$} = \prod_{t=1}^{T} \textit{$p(y_{i,t}|y_{i,t-1},..,y_{i,0},\theta_{S_i})$}
+$p(y_i | \theta_{S_i})$} = \prod_{t=1}^{T} $p(y_{i,t}|y_{i,t-1},..,y_{i,0},\theta_{S_i})$
 \end{equation}
 
-Où \textit{$p(y_i|y_{i,t-1},..,y_{i,0},\theta_{S_i})$} est une densité connue qui dépendra du modèle choisi.
+Où $p(y_i|y_{i,t-1},..,y_{i,0},\theta_{S_i})$ est une densité connue qui dépendra du modèle choisi.
 \newline
 Par conséquent, 
 \begin{equation}
-\textit{$p(y_i | S_i, \theta_1,...,\theta_K) =  p(y_i | \theta_{S_i})$} = \left\{\begin{array}{ll}
-  \textit{$p(y_i | \theta_{1})$}   & \mbox{si } S_i = 1  \\
+$p(y_i | S_i, \theta_1,...,\theta_K) =  p(y_i | \theta_{S_i})$ = \left\{\begin{array}{ll}
+  $p(y_i | \theta_{1})$   & \mbox{si } S_i = 1  \\
   ...                                         \\
-  \textit{$p(y_i | \theta_{K})$}   & \mbox{si } S_i = K
+  $p(y_i | \theta_{K})$   & \mbox{si } S_i = K
 \end{array}\right.
 \end{equation}
 \newline
